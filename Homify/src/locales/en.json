@@ -1,3 +1,5 @@
+
+
 {
   "app": {
     "name": "Agri-Waste Connect",
@@ -52,13 +54,17 @@
   "nav": {
     "dashboard": "Dashboard",
     "manageWaste": "Manage Waste",
+    "browseWaste": "Browse Waste",
+    "postRequirement": "Post Requirement",
+    "transport": "Transport",
     "orders": "Orders",
     "wastePrediction": "Waste Prediction",
     "profile": "Profile",
     "marketplace": "Marketplace",
     "users": "Users",
     "waste": "Waste",
-    "overview": "Overview"
+    "overview": "Overview",
+    "logout": "Logout"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}!",
@@ -72,10 +78,13 @@
     "wasteCollected": "Waste Collected",
     "wasteSold": "Waste Sold",
     "chartLoading": "Chart loading...",
-    "quickActions": "Quick Actions",
-    "addWaste": "Add Waste",
-    "viewMarketplace": "View Marketplace",
-    "viewPredictions": "View Predictions"
+    "quickActions": {
+      "browseWaste": "Browse Waste",
+      "postRequirement": "Post Requirement",
+      "addWaste": "Add Waste",
+      "viewMarketplace": "View Marketplace",
+      "viewPredictions": "View Predictions"
+    }
   },
   "orders": {
     "title": "Orders",
@@ -128,13 +137,19 @@
   },
   "marketplace": {
     "title": "Marketplace",
-    "filters": "Filters",
+    "filters": {
+      "wasteType": "Waste Type",
+      "location": "Location",
+      "priceRange": "Price Range",
+      "availability": "Availability"
+    },
+    "sortOptions": {
+      "newest": "Newest First",
+      "priceLowHigh": "Price: Low to High",
+      "priceHighLow": "Price: High to Low",
+      "nearest": "Nearest First"
+    },
     "search": "Search waste items...",
-    "sortBy": "Sort by",
-    "newest": "Newest",
-    "priceHighToLow": "Price: High to Low",
-    "priceLowToHigh": "Price: Low to High",
-    "available": "Available",
     "placeOrder": "Place Order",
     "contactSeller": "Contact Seller",
     "noResults": "No waste items found",
@@ -213,5 +228,13 @@
     "unauthorized": "You are not authorized to access this resource.",
     "notFound": "The requested resource was not found.",
     "validation": "Please check your input and try again."
+  },
+  "validation": {
+    "quantityRequired": "Quantity is required",
+    "minQuantity": "Minimum quantity is 1",
+    "maxQuantity": "Exceeds available quantity",
+    "locationRequired": "Location is required",
+    "priceRequired": "Price is required",
+    "dateRequired": "Date is required"
   }
-} 
+}

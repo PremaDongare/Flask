@@ -28,10 +28,14 @@ import CreativeWasteUses from './pages/farmer/CreativeWasteUses';
 
 // Buyer pages
 import BuyerDashboard from './pages/buyer/Dashboard';
-import Marketplace from './pages/buyer/Marketplace';
+import BuyerMarketplace from './pages/buyer/Marketplace';
 import BuyerOrders from './pages/buyer/Orders';
 import BuyerProfile from './pages/buyer/Profile';
-import TransportSystem from './pages/buyer/TransportSystem';
+import BuyerTransportSystem from './pages/buyer/TransportSystem';
+import BuyerBrowseWaste from './pages/buyer/BrowseWaste';
+import BuyerPostRequirement from './pages/buyer/PostRequirement';
+import BuyerTransport from './pages/buyer/Transport';
+
 
 // Admin pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -102,19 +106,25 @@ function App() {
             <Route path="CreativeWasteUses" element={<CreativeWasteUses/>} />
           </Route>
           
-          {/* Buyer routes */}
-          <Route path="/buyer" element={
+           {/* Buyer routes */}
+           <Route path="/buyer" element={
             <ProtectedRoute allowedRoles={['buyer']}>
               <BuyerLayout />
             </ProtectedRoute>
           }>
             <Route index element={<BuyerDashboard />} />
-            <Route path="marketplace" element={<Marketplace />} />
+            <Route path="browsewaste" element={<BuyerBrowseWaste />} />
+            <Route path="postrequirement" element={<BuyerPostRequirement />} />
+
+            <Route path="marketplace" element={<BuyerMarketplace />} />
+
             <Route path="orders" element={<BuyerOrders />} />
             <Route path="profile" element={<BuyerProfile />} />
             <Route path="chat" element={<Chat />} />
             <Route path="chat/:id" element={<Chat />} />
-            <Route path="transport" element={<TransportSystem />} />
+            <Route path="transport" element={<BuyerTransport />} />
+
+            <Route path="transportsystem" element={<BuyerTransportSystem />} />
           </Route>
           
           {/* Admin routes */}
