@@ -200,7 +200,7 @@ function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {t('dashboard.title')}
+        {t('Dashboard')}
       </motion.h1>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -215,7 +215,7 @@ function Dashboard() {
               <FaLeaf className="text-2xl" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-500">{t('dashboard.totalWasteListed')}</p>
+              <p className="text-lg font-medium text-gray-500">{t('TotalWasteListed')}</p>
               <p className="text-2xl font-semibold text-gray-800">{dashboardData.totalWasteListed} kg</p>
             </div>
           </div>
@@ -232,7 +232,7 @@ function Dashboard() {
               <FaRecycle className="text-2xl" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-500">{t('dashboard.totalWasteSold')}</p>
+              <p className="text-lg font-medium text-gray-500">{t('TotalWasteSold')}</p>
               <p className="text-2xl font-semibold text-gray-800">{dashboardData.totalWasteSold} kg</p>
             </div>
           </div>
@@ -249,7 +249,7 @@ function Dashboard() {
               <FaRupeeSign className="text-2xl" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-500">{t('dashboard.totalRevenue')}</p>
+              <p className="text-lg font-medium text-gray-500">{t('TotalRevenue')}</p>
               <p className="text-2xl font-semibold text-gray-800">{formatCurrency(dashboardData.totalRevenue)}</p>
             </div>
           </div>
@@ -266,7 +266,7 @@ function Dashboard() {
               <FaBoxOpen className="text-2xl" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-500">{t('dashboard.pendingOrders')}</p>
+              <p className="text-lg font-medium text-gray-500">{t('PendingOrders')}</p>
               <p className="text-2xl font-semibold text-gray-800">{dashboardData.pendingOrders}</p>
             </div>
           </div>
@@ -275,7 +275,7 @@ function Dashboard() {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.monthlySales')}</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('MonthlySales')}</h2>
           
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
@@ -283,13 +283,13 @@ function Dashboard() {
             </div>
           ) : (
             <div className="h-64 flex items-center justify-center">
-              <p className="text-gray-500">{t('dashboard.chartPlaceholder')}</p>
+              <p className="text-gray-500">{t('ChartPlaceholder')}</p>
             </div>
           )}
         </div>
         
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.wasteByType')}</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('WasteByType')}</h2>
           
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
@@ -319,9 +319,9 @@ function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">{t('dashboard.recentOrders')}</h2>
+            <h2 className="text-xl font-semibold text-gray-800">{t('RecentOrders')}</h2>
             <Link to="/farmer/orders" className="text-blue-600 hover:text-blue-800 text-sm">
-              {t('dashboard.viewAll')}
+              {t('View All')}
             </Link>
           </div>
           
@@ -388,7 +388,7 @@ function Dashboard() {
         </div>
         
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.orderStatus')}</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('OrderStatus')}</h2>
           
           {isLoading ? (
             <div className="flex justify-center items-center h-64">

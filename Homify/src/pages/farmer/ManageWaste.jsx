@@ -200,7 +200,7 @@ function ManageWaste() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
-          {t('waste.manageListings')}
+          {t('Waste Listings')}
         </h1>
         
         <motion.button
@@ -224,7 +224,7 @@ function ManageWaste() {
               type="text"
               value={searchTerm}
               onChange={handleSearch}
-              placeholder={t('waste.searchPlaceholder')}
+              placeholder={t('Search Order')}
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500"
             />
           </div>
@@ -236,10 +236,10 @@ function ManageWaste() {
               onChange={handleFilterChange}
               className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500"
             >
-              <option value="all">{t('waste.filterAll')}</option>
-              <option value="available">{t('waste.filterAvailable')}</option>
-              <option value="pending">{t('waste.filterPending')}</option>
-              <option value="sold">{t('waste.filterSold')}</option>
+              <option value="all">{t('All Orders')}</option>
+              <option value="available">{t('Available')}</option>
+              <option value="pending">{t('Pending')}</option>
+              <option value="sold">{t('Sold')}</option>
             </select>
           </div>
         </div>
@@ -304,9 +304,9 @@ function ManageWaste() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(item.status)}`}>
-                        {item.status === 'available' && t('waste.statusAvailable')}
-                        {item.status === 'pending' && t('waste.statusPending')}
-                        {item.status === 'sold' && t('waste.statusSold')}
+                        {item.status === 'available' && t('Available')}
+                        {item.status === 'pending' && t('Pending')}
+                        {item.status === 'sold' && t('Sold')}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -372,16 +372,28 @@ function ManageWaste() {
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">{t('waste.addNewWaste')}</h2>
             <form onSubmit={handleAddWaste} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">{t('waste.type')}</label>
-                <input
-                  type="text"
-                  required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                  value={newWaste.type}
-                  onChange={(e) => setNewWaste({...newWaste, type: e.target.value})}
-                />
-              </div>
+            <div>
+  <label className="block text-sm font-medium text-gray-700">Farmer Name</label>
+  <input
+    type="text"
+    required
+    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+    value={newWaste.farmerName}
+    onChange={(e) => setNewWaste({...newWaste, farmerName: e.target.value})}
+  />
+</div>
+
+<div>
+  <label className="block text-sm font-medium text-gray-700">Waste Type</label>
+  <input
+    type="text"
+    required
+    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+    value={newWaste.type}
+    onChange={(e) => setNewWaste({...newWaste, type: e.target.value})}
+  />
+</div>
+
 
               <div className="grid grid-cols-2 gap-4">
                 <div>

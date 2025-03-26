@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaLeaf, FaChartLine, FaShoppingCart, FaChartBar, FaComments, FaTruck, FaRecycle } from 'react-icons/fa';
+import { FaLeaf, FaChartLine, FaShoppingCart, FaChartBar, FaComments, FaTruck, FaRecycle, FaQuestionCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 const FarmerNavigation = () => {
@@ -68,7 +68,7 @@ const FarmerNavigation = () => {
         <span>{t('navigation.transport')}</span>
       </NavLink>
 
-      {/* New Waste Recycling Navigation Link */}
+      {/* Creative Waste Uses Navigation Link */}
       <NavLink
         to="/CreativeWasteUses"
         className={({ isActive }) =>
@@ -79,6 +79,30 @@ const FarmerNavigation = () => {
       >
         <FaRecycle />
         <span>{t('navigation.CreativeWasteUses')}</span>
+      </NavLink>
+
+      {/* New PostQuery Navigation Link */}
+      <NavLink
+        to="/PostQuery"
+        className={({ isActive }) =>
+          `flex items-center space-x-2 p-2 hover:bg-green-50 rounded-md ${
+            isActive ? 'bg-green-100 text-green-600' : 'text-gray-700'
+          }`
+        }
+      >
+        <FaQuestionCircle />
+        <span>{t('navigation.postQuery')}</span>
+      </NavLink>
+      <NavLink
+        to="/NearByBuyers"
+        className={({ isActive }) =>
+          `flex items-center space-x-2 p-2 hover:bg-green-50 rounded-md ${
+            isActive ? 'bg-green-100 text-green-600' : 'text-gray-700'
+          }`
+        }
+      >
+        <FaQuestionCircle />
+        <span>{t('navigation.NearByBuyers')}</span>
       </NavLink>
     </nav>
   );

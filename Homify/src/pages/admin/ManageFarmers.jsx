@@ -242,7 +242,7 @@ function ManageFarmers() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        {t('admin.manageFarmers.title')}
+        {t('Display Farmers')}
       </h1>
 
       <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -250,7 +250,7 @@ function ManageFarmers() {
           <form onSubmit={handleSearch} className="flex-1">
             <input
               type="text"
-              placeholder={t('admin.manageFarmers.searchPlaceholder')}
+              placeholder={t('Search Farmers')}
               className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -258,16 +258,7 @@ function ManageFarmers() {
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
           </form>
         </div>
-        <select
-          className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-          value={selectedStatus}
-          onChange={handleStatusChange}
-        >
-          <option value="all">{t('admin.manageFarmers.filterAll')}</option>
-          <option value="active">{t('admin.manageFarmers.filterActive')}</option>
-          <option value="blocked">{t('admin.manageFarmers.filterBlocked')}</option>
-          <option value="pending">{t('admin.manageFarmers.filterPending')}</option>
-        </select>
+        
       </div>
 
       {isLoading ? (
@@ -278,7 +269,7 @@ function ManageFarmers() {
         <div className="bg-white rounded-lg shadow-md mb-8">
           <div className="p-6 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-800">
-              {t('admin.manageFarmers.farmersList')}
+              {t('Available Farmers')}
             </h2>
           </div>
           <div className="overflow-x-auto">
@@ -286,16 +277,16 @@ function ManageFarmers() {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    {t('admin.manageFarmers.name')}
+                    {t('Farmer Name')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    {t('admin.manageFarmers.email')}
+                    {t('Email')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    {t('admin.manageFarmers.status')}
+                    {t('Status')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    {t('admin.manageFarmers.actions')}
+                    {t('Actions')}
                   </th>
                 </tr>
               </thead>
@@ -356,7 +347,7 @@ function ManageFarmers() {
               </button>
             </div>
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-              <div>
+              {/* <div>
                 <p className="text-sm text-gray-700">
                   {t('common.showing')} <span className="font-medium">{(currentPage - 1) * 10 + 1}</span>{' '}
                   {t('common.to')}{' '}
@@ -367,7 +358,7 @@ function ManageFarmers() {
                   <span className="font-medium">{filteredFarmers.length}</span>{' '}
                   {t('common.results')}
                 </p>
-              </div>
+              </div> */}
               <div>
                 <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -393,7 +384,7 @@ function ManageFarmers() {
       <div className="bg-white rounded-lg shadow-md">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-800">
-            {t('admin.manageFarmers.queries')}
+            {t('Manage Farmers Queries')}
           </h2>
         </div>
         <div className="overflow-x-auto">
@@ -401,16 +392,19 @@ function ManageFarmers() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  {t('admin.manageFarmers.farmer')}
+                  {t('Farmer Name')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  {t('admin.manageFarmers.query')}
+                  {t('Email')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  {t('admin.manageFarmers.status')}
+                  {t('Query Type')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  {t('admin.manageFarmers.actions')}
+                  {t('Query Description')}
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  {t('Actions')}
                 </th>
               </tr>
             </thead>

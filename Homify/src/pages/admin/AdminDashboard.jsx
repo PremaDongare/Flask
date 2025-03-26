@@ -238,7 +238,7 @@ function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <QuickActionCard
             icon={FaUsers}
-            title={t('admin.dashboard.totalUsers')}
+            title={t('TotalUsers')}
             value={stats.totalUsers}
             link="/admin/manage-users"
             color="hover:bg-blue-50"
@@ -259,7 +259,7 @@ function AdminDashboard() {
           />
           <QuickActionCard
             icon={FaRupeeSign}
-            title={t('admin.dashboard.totalRevenue')}
+            title={t('TotalRevenue')}
             value={`₹${stats.totalRevenue.toLocaleString()}`}
             link="/admin/finance"
             color="hover:bg-purple-50"

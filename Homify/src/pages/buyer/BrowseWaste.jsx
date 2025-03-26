@@ -817,6 +817,7 @@ function BrowseWaste() {
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [selectedListing, setSelectedListing] = useState(null);
   const [orderQuantity, setOrderQuantity] = useState(1);
+  const [Buyer, setBuyer] = useState(""); // <-- Added this line
   const [orderNotes, setOrderNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -831,6 +832,7 @@ function BrowseWaste() {
   useEffect(() => {
     fetchWasteListings();
   }, []);
+
   
   const fetchWasteListings = async () => {
     setIsLoading(true);
@@ -841,63 +843,6 @@ function BrowseWaste() {
       console.error('Error fetching waste listings:', error);
       // Mock data for demonstration
       const mockListings = [
-        {
-          id: 1,
-          farmerId: 101,
-          farmerName: 'Rajesh Kumar',
-          farmerRating: 4.8,
-          wasteType: 'Rice Straw',
-          quantity: 500,
-          unit: 'kg',
-          price: 2.5,
-          location: 'Patna, Bihar',
-          description: 'High-quality rice straw, perfect for mushroom cultivation or animal bedding.',
-          availableFrom: '2023-10-15',
-          availableTo: '2023-11-30',
-          images: [
-            'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80',
-          ],
-          distance: 15,
-          postedDate: '2023-10-10',
-        },
-        {
-          id: 2,
-          farmerId: 102,
-          farmerName: 'Sunita Devi',
-          farmerRating: 4.5,
-          wasteType: 'Wheat Straw',
-          quantity: 300,
-          unit: 'kg',
-          price: 3,
-          location: 'Ludhiana, Punjab',
-          description: 'Clean wheat straw, suitable for animal feed or composting.',
-          availableFrom: '2023-10-20',
-          availableTo: '2023-12-15',
-          images: [
-            'https://images.unsplash.com/photo-1472653525502-fc569e405a74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-          ],
-          distance: 25,
-          postedDate: '2023-10-05',
-        },
-        {
-          id: 3,
-          farmerId: 103,
-          farmerName: 'Harpreet Singh',
-          farmerRating: 4.9,
-          wasteType: 'Corn Stalks',
-          quantity: 400,
-          unit: 'kg',
-          price: 2,
-          location: 'Amritsar, Punjab',
-          description: 'Dried corn stalks, great for biofuel production or animal feed.',
-          availableFrom: '2023-10-25',
-          availableTo: '2023-12-10',
-          images: [
-            'https://images.unsplash.com/photo-1516467508483-a7212febe31a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
-          ],
-          distance: 30,
-          postedDate: '2023-10-08',
-        },
         {
           id: 4,
           farmerId: 104,
@@ -917,44 +862,7 @@ function BrowseWaste() {
           distance: 40,
           postedDate: '2023-10-12',
         },
-        {
-          id: 5,
-          farmerId: 105,
-          farmerName: 'Ramesh Patel',
-          farmerRating: 4.7,
-          wasteType: 'Vegetable Waste',
-          quantity: 200,
-          unit: 'kg',
-          price: 1.5,
-          location: 'Ahmedabad, Gujarat',
-          description: 'Mixed vegetable waste, perfect for composting or biogas production.',
-          availableFrom: '2023-10-18',
-          availableTo: '2023-11-20',
-          images: [
-            'https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80',
-          ],
-          distance: 35,
-          postedDate: '2023-10-07',
-        },
-        {
-          id: 6,
-          farmerId: 106,
-          farmerName: 'Anita Sharma',
-          farmerRating: 4.4,
-          wasteType: 'Rice Husk',
-          quantity: 350,
-          unit: 'kg',
-          price: 2.2,
-          location: 'Raipur, Chhattisgarh',
-          description: 'Clean rice husk, suitable for fuel, fertilizer, or insulation material.',
-          availableFrom: '2023-10-22',
-          availableTo: '2023-12-05',
-          images: [
-            'https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          ],
-          distance: 50,
-          postedDate: '2023-10-09',
-        },
+       
       ];
       setWasteListings(mockListings);
     } finally {
@@ -1454,18 +1362,19 @@ function BrowseWaste() {
                         </div>
                       </div>
                       
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          {t('marketplace.orderNotes')}
-                        </label>
-                        <textarea
-                          value={orderNotes}
-                          onChange={(e) => setOrderNotes(e.target.value)}
-                          rows="3"
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                          placeholder={t('marketplace.orderNotesPlaceholder')}
-                        ></textarea>
-                      </div>
+                      <div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    {t('Buyer')}
+  </label>
+  <input
+    type="text"
+    value={Buyer}
+    onChange={(e) => setBuyer(e.target.value)}
+    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+    placeholder={t('Buyer')}
+  />
+</div>
+
                     </div>
                     
                     <button

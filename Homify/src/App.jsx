@@ -25,6 +25,8 @@ import SalesDashboard from './pages/farmer/SalesDashboard';
 import Tutorials from './pages/farmer/Tutorials';
 import FarmerTransport from './pages/farmer/FarmerTransport';
 import CreativeWasteUses from './pages/farmer/CreativeWasteUses';
+import FarmerQueryForm from './pages/farmer/PostQuery';
+import NearByBuyers from './pages/farmer/NearByBuyers';
 
 // Buyer pages
 import BuyerDashboard from './pages/buyer/Dashboard';
@@ -104,6 +106,8 @@ function App() {
             <Route path="tutorials" element={<Tutorials />} />
             <Route path="transport" element={<FarmerTransport />} />
             <Route path="CreativeWasteUses" element={<CreativeWasteUses/>} />
+            <Route path="PostQuery" element={<FarmerQueryForm />} />
+            <Route path="NearByBuyers" element={<NearByBuyers />} />
           </Route>
           
            {/* Buyer routes */}

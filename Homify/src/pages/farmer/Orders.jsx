@@ -271,7 +271,7 @@ function Orders() {
           <div className="relative">
             <input
               type="text"
-              placeholder={t('orders.searchPlaceholder')}
+              placeholder={t('Search orders...')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"

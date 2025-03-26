@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const App = () => {
   const [cropType, setCropType] = useState("");
@@ -32,21 +31,28 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api/predict", {
-        cropType,
-        wasteType,
-        farmSize: parseFloat(farmSize),
+      const response = await fetch("http://127.0.0.1:5000/api/predict", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cropType,
+          wasteType,
+          farmSize: parseFloat(farmSize),
+        }),
       });
 
-      console.log("Waste prediction response:", response.data);
+      const data = await response.json();
+      console.log("Waste prediction response:", data);
 
-      if (response.data.success) {
-        setPredictedWaste(response.data.predictedWaste);
+      if (data.success) {
+        setPredictedWaste(data.predictedWaste);
       } else {
-        setError(response.data.error || "Error predicting waste. Please try again.");
+        setError(data.error || "Error predicting waste. Please try again.");
       }
     } catch (err) {
-      console.error("API error:", err.response ? err.response.data : err.message);
+      console.error("API error:", err);
       setError("Error predicting waste. Please try again.");
     } finally {
       setIsLoading(false);
@@ -69,22 +75,29 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api/predict_price", {
-        cropType,
-        wasteType,
-        farmSize: parseFloat(farmSize),
-        predictedWaste: parseFloat(predictedWaste),
+      const response = await fetch("http://127.0.0.1:5000/api/predict_price", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cropType,
+          wasteType,
+          farmSize: parseFloat(farmSize),
+          predictedWaste: parseFloat(predictedWaste),
+        }),
       });
 
-      console.log("Price prediction response:", response.data);
+      const data = await response.json();
+      console.log("Price prediction response:", data);
 
-      if (response.data.success) {
-        setWastePrice(response.data.wastePrice);
+      if (data.success) {
+        setWastePrice(data.wastePrice);
       } else {
-        setError(response.data.error || "Error predicting price. Please try again.");
+        setError(data.error || "Error predicting price. Please try again.");
       }
     } catch (err) {
-      console.error("API error:", err.response ? err.response.data : err.message);
+      console.error("API error:", err);
       setError("Error predicting price. Please try again.");
     } finally {
       setIsLoadingPrice(false);
@@ -92,145 +105,141 @@ const App = () => {
   };
 
   return (
-    <div style={styles.mainContainer}>
-      {/* Crop Waste Prediction Container */}
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Crop Waste Prediction</h2>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
+      {/* Page Header */}
+      <header className="w-full max-w-4xl mb-8 text-center">
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
+          Crop Waste & Price Prediction
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Predict agricultural waste quantities and potential market prices based on crop type, waste type, and farm size
+        </p>
+      </header>
 
-        {/* Crop Type Dropdown */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Crop Type:</label>
-          <select value={cropType} onChange={(e) => setCropType(e.target.value)} style={styles.input}>
-            <option value="">Select Crop Type</option>
-            {cropOptions.map((crop, index) => (
-              <option key={index} value={crop}>{crop}</option>
-            ))}
-          </select>
+      <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl">
+        {/* Crop Waste Prediction Card */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Crop Waste Prediction</h2>
+          
+          <div className="space-y-4">
+            {/* Crop Type Dropdown */}
+            <div>
+              <label className="block text-gray-700 font-semibold mb-2">Crop Type</label>
+              <select 
+                value={cropType} 
+                onChange={(e) => setCropType(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="">Select Crop Type</option>
+                {cropOptions.map((crop, index) => (
+                  <option key={index} value={crop}>{crop}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Waste Type Dropdown */}
+            <div>
+              <label className="block text-gray-700 font-semibold mb-2">Waste Type</label>
+              <select 
+                value={wasteType} 
+                onChange={(e) => setWasteType(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="">Select Waste Type</option>
+                {wasteOptions.map((waste, index) => (
+                  <option key={index} value={waste}>{waste}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Farm Size Input */}
+            <div>
+              <label className="block text-gray-700 font-semibold mb-2">Farm Size (hectares)</label>
+              <input
+                type="number"
+                value={farmSize}
+                onChange={(e) => setFarmSize(e.target.value)}
+                placeholder="Enter farm size"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </div>
+
+            {/* Predict Waste Button */}
+            <button 
+              onClick={handlePredictWaste} 
+              disabled={isLoading}
+              className={`w-full py-3 rounded-md text-white font-semibold transition-colors duration-300 ${
+                isLoading 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-green-600 hover:bg-green-700 active:bg-green-800'
+              }`}
+            >
+              {isLoading ? "Predicting..." : "Predict Waste"}
+            </button>
+
+            {/* Prediction Result */}
+            {predictedWaste !== null && (
+              <div className="text-center mt-4">
+                <p className="text-green-600 font-bold">
+                  Predicted Waste: {predictedWaste} tons
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Waste Type Dropdown */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Waste Type:</label>
-          <select value={wasteType} onChange={(e) => setWasteType(e.target.value)} style={styles.input}>
-            <option value="">Select Waste Type</option>
-            {wasteOptions.map((waste, index) => (
-              <option key={index} value={waste}>{waste}</option>
-            ))}
-          </select>
+        {/* Waste Price Prediction Card */}
+        <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Waste Price Prediction</h2>
+          
+          <div className="space-y-4">
+            {/* Predicted Waste Input */}
+            <div>
+              <label className="block text-gray-700 font-semibold mb-2">Predicted Waste (tons)</label>
+              <input
+                type="number"
+                value={predictedWaste || ""}
+                disabled
+                placeholder="Predicted waste will appear here"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
+              />
+            </div>
+
+            {/* Predict Price Button */}
+            <button 
+              onClick={handlePredictPrice} 
+              disabled={isLoadingPrice || !predictedWaste}
+              className={`w-full py-3 rounded-md text-white font-semibold transition-colors duration-300 ${
+                isLoadingPrice || !predictedWaste
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
+              }`}
+            >
+              {isLoadingPrice ? "Predicting..." : "Predict Price"}
+            </button>
+
+            {/* Price Prediction Result */}
+            {wastePrice !== null && (
+              <div className="text-center mt-4">
+                <p className="text-blue-600 font-bold">
+                  Predicted Price: ₹{wastePrice} per ton
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Farm Size Input */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Farm Size (hectares):</label>
-          <input
-            type="number"
-            value={farmSize}
-            onChange={(e) => setFarmSize(e.target.value)}
-            placeholder="Enter farm size"
-            style={styles.input}
-          />
-        </div>
-
-        {/* Predict Waste Button */}
-        <button onClick={handlePredictWaste} disabled={isLoading} style={isLoading ? styles.buttonDisabled : styles.button}>
-          {isLoading ? "Predicting..." : "Predict Waste"}
-        </button>
-
-        {/* Prediction Result */}
-        {predictedWaste !== null && <p style={styles.result}>Predicted Waste: {predictedWaste} tons</p>}
+        {/* Error Message */}
+        {error && (
+          <div className="md:col-span-2 text-center">
+            <p className="text-red-600 font-bold bg-red-100 p-3 rounded-md">
+              {error}
+            </p>
+          </div>
+        )}
       </div>
-
-      {/* Waste Price Prediction Container */}
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Waste Price Prediction</h2>
-
-        {/* Predicted Waste Input */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Predicted Waste (tons):</label>
-          <input
-            type="number"
-            value={predictedWaste || ""}
-            disabled
-            placeholder="Predicted waste will appear here"
-            style={styles.input}
-          />
-        </div>
-
-        {/* Predict Price Button */}
-        <button onClick={handlePredictPrice} disabled={isLoadingPrice || !predictedWaste} style={isLoadingPrice || !predictedWaste ? styles.buttonDisabled : styles.button}>
-          {isLoadingPrice ? "Predicting..." : "Predict Price"}
-        </button>
-
-        {/* Price Prediction Result */}
-        {wastePrice !== null && <p style={styles.result}>Predicted Price: ₹{wastePrice} per ton</p>}
-      </div>
-
-      {/* Error Message */}
-      {error && <p style={styles.error}>{error}</p>}
     </div>
   );
-};
-
-// ✅ Inline CSS Styles
-const styles = {
-  mainContainer: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    marginTop: "50px",
-    fontFamily: "Arial, sans-serif",
-  },
-  container: {
-    width: "400px",
-    padding: "20px",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9",
-    textAlign: "center",
-  },
-  heading: {
-    color: "#333",
-  },
-  formGroup: {
-    marginBottom: "15px",
-  },
-  label: {
-    display: "block",
-    fontWeight: "bold",
-    marginBottom: "5px",
-  },
-  input: {
-    width: "100%",
-    padding: "8px",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-  },
-  button: {
-    backgroundColor: "#28a745",
-    color: "white",
-    border: "none",
-    padding: "10px 15px",
-    cursor: "pointer",
-    borderRadius: "5px",
-  },
-  buttonDisabled: {
-    backgroundColor: "#aaa",
-    color: "white",
-    border: "none",
-    padding: "10px 15px",
-    cursor: "not-allowed",
-    borderRadius: "5px",
-  },
-  result: {
-    color: "green",
-    fontWeight: "bold",
-    marginTop: "10px",
-  },
-  error: {
-    color: "red",
-    fontWeight: "bold",
-    marginTop: "10px",
-  },
 };
 
 export default App;

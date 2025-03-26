@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { 
   FaHome, FaRecycle, FaExchangeAlt, FaChartLine, FaBook,
-  FaUser, FaSignOutAlt, FaBars, FaTimes, FaGlobe 
+  FaUser, FaSignOutAlt, FaBars, FaTimes, FaGlobe, FaQuestionCircle 
 } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import PageTransition from '../components/PageTransition';
@@ -64,7 +64,7 @@ function FarmerLayout() {
                 }
               >
                 <FaRecycle className="mr-3" />
-                {t('nav.wasteSelling')}
+                {t('WasteSelling')}
               </NavLink>
 
               
@@ -95,6 +95,7 @@ function FarmerLayout() {
                 <FaChartLine className="mr-3" />
                 {t('nav.wastePrediction')}
               </NavLink>
+              
               <NavLink 
                 to="/farmer/CreativeWasteUses" 
                 className={({ isActive }) => 
@@ -109,6 +110,34 @@ function FarmerLayout() {
                 {t('CreativeWasteUses')}
               </NavLink>
               
+              {/* New PostQuery Navigation Link */}
+              <NavLink 
+                to="/farmer/PostQuery" 
+                className={({ isActive }) => 
+                  `flex items-center px-4 py-2 rounded-md transition-colors ${
+                    isActive 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`
+                }
+              >
+                <FaQuestionCircle className="mr-3" />
+                {t('PostQuery')}
+              </NavLink>
+
+              <NavLink 
+                to="/farmer/NearByBuyers" 
+                className={({ isActive }) => 
+                  `flex items-center px-4 py-2 rounded-md transition-colors ${
+                    isActive 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`
+                }
+              >
+                <FaQuestionCircle className="mr-3" />
+                {t('NearByBuyers')}
+              </NavLink>
               
               <NavLink 
                 to="/farmer/tutorials" 
@@ -121,7 +150,7 @@ function FarmerLayout() {
                 }
               >
                 <FaBook className="mr-3" />
-                {t('tutorials')}
+                {t('Tutorials')}
               </NavLink>
               
               <NavLink 

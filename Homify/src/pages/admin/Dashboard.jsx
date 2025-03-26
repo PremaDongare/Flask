@@ -60,7 +60,7 @@ function Dashboard() {
                   <FaUsers className="text-2xl" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-gray-500 text-sm">{t('dashboard.totalUsers')}</p>
+                  <p className="text-gray-500 text-sm">{t('TotalUsers')}</p>
                   <h3 className="text-2xl font-bold text-gray-800">{stats.totalUsers}</h3>
                 </div>
               </div>
@@ -92,7 +92,7 @@ function Dashboard() {
                   <FaExchangeAlt className="text-2xl" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-gray-500 text-sm">{t('dashboard.totalOrders')}</p>
+                  <p className="text-gray-500 text-sm">{t('TotalOrders')}</p>
                   <h3 className="text-2xl font-bold text-gray-800">{stats.totalOrders}</h3>
                 </div>
               </div>
@@ -108,7 +108,7 @@ function Dashboard() {
                   <FaChartPie className="text-2xl" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-gray-500 text-sm">{t('dashboard.totalRevenue')}</p>
+                  <p className="text-gray-500 text-sm">{t('TotalRevenue')}</p>
                   <h3 className="text-2xl font-bold text-gray-800">₹{stats.revenue}</h3>
                 </div>
               </div>
@@ -118,12 +118,12 @@ function Dashboard() {
           {/* Additional dashboard content would go here */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">{t('dashboard.recentActivity')}</h2>
+              <h2 className="text-xl font-semibold mb-4">{t('RecentActivity')}</h2>
               <p className="text-gray-500">{t('dashboard.comingSoon')}</p>
             </div>
             
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">{t('dashboard.systemStatus')}</h2>
+              <h2 className="text-xl font-semibold mb-4">{t('SystemStatus')}</h2>
               <p className="text-gray-500">{t('dashboard.comingSoon')}</p>
             </div>
           </div>

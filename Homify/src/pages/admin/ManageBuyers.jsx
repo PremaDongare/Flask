@@ -126,7 +126,7 @@ function ManageBuyers() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        {t('admin.manageBuyers.title')}
+        {t('Display Buyers')}
       </h1>
 
       {/* Search and Filter */}
@@ -134,14 +134,14 @@ function ManageBuyers() {
         <div className="relative flex-1">
           <input
             type="text"
-            placeholder={t('admin.manageBuyers.searchPlaceholder')}
+            placeholder={t(' Search Buyers')}
             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
-        <select
+        {/* <select
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
@@ -149,14 +149,14 @@ function ManageBuyers() {
           <option value="all">{t('admin.manageBuyers.filterAll')}</option>
           <option value="active">{t('admin.manageBuyers.filterActive')}</option>
           <option value="blocked">{t('admin.manageBuyers.filterBlocked')}</option>
-        </select>
+        </select> */}
       </div>
 
       {/* Buyers List */}
       <div className="bg-white rounded-lg shadow-md mb-8">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-800">
-            {t('admin.manageBuyers.buyersList')}
+            {t('Available Buyers')}
           </h2>
         </div>
         <div className="overflow-x-auto">
@@ -228,7 +228,7 @@ function ManageBuyers() {
       <div className="bg-white rounded-lg shadow-md">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-800">
-            {t('admin.manageBuyers.queries')}
+            {t('Manage Buyers Queries')}
           </h2>
         </div>
         <div className="overflow-x-auto">
