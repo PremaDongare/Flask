@@ -286,10 +286,11 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FaBox, FaEye, FaFilter, FaSearch } from 'react-icons/fa';
-import api from '../../services/api';
+import axios from 'axios';
 
 function Orders() {
   const { t } = useTranslation();
+  const [wasteListings, setWasteListings] = useState([]);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
@@ -302,48 +303,32 @@ function Orders() {
   const fetchOrders = async () => {
     setIsLoading(true);
     try {
-      // This would normally fetch from the API
-      // For demo, we'll use mock data
+      const response = await axios.get("http://127.0.0.1:5000/api/get_waste_listings");
+  
+      console.log("data:", response);
+      if (response.data.success && Array.isArray(response.data.listings)) {
+        // Filter out listings where status is NOT "active"
+        const filteredListings = response.data.listings.filter(
+          (item) => item.status !== "active"
+        );
+  
+        const transformedListings = filteredListings.map((item) => ({
+          id: item.id,
+          farmerName: item.farmerName,
+          wasteType: item.wasteType,
+          quantity: item.quantity,
+          unit: item.unit,
+          price: item.priceOffered,
+          location: item.location,
+          description: item.description,
+          availableFrom: item.createdAt,
+          status: item.status, // Keep status for reference
+        }));
+  
+        setWasteListings(transformedListings);
+      }
+  
       const mockOrders = [
-        {
-          id: 'ORD-001',
-          farmerId: '101',
-          farmerName: 'Rajesh Kumar',
-          wasteType: 'Rice Straw',
-          quantity: 200,
-          unit: 'kg',
-          price: 2.5,
-          totalAmount: 500,
-          status: 'pending',
-          orderDate: '2023-05-10T10:30:00Z',
-          deliveryDate: null,
-        },
-        {
-          id: 'ORD-002',
-          farmerId: '102',
-          farmerName: 'Anita Sharma',
-          wasteType: 'Sugarcane Bagasse',
-          quantity: 500,
-          unit: 'kg',
-          price: 1.8,
-          totalAmount: 900,
-          status: 'confirmed',
-          orderDate: '2023-05-05T14:45:00Z',
-          deliveryDate: '2023-05-15',
-        },
-        {
-          id: 'ORD-003',
-          farmerId: '103',
-          farmerName: 'Suresh Patel',
-          wasteType: 'Corn Stalks',
-          quantity: 300,
-          unit: 'kg',
-          price: 2.0,
-          totalAmount: 600,
-          status: 'completed',
-          orderDate: '2023-04-28T09:15:00Z',
-          deliveryDate: '2023-05-08',
-        },
         {
           id: 'ORD-004',
           farmerId: '104',
@@ -358,14 +343,15 @@ function Orders() {
           deliveryDate: null,
         },
       ];
-
+  
       setOrders(mockOrders);
     } catch (error) {
-      console.error('Error fetching orders:', error);
+      console.error("Error fetching orders:", error);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
